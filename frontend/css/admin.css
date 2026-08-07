@@ -1,0 +1,314 @@
+/* --- 1. Variables Globales y Diseño Base --- */
+:root {
+    --bg-main: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-border: rgba(255, 255, 255, 0.08);
+    
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    
+    --danger: #f43f5e;
+    --danger-hover: #e11d48;
+    --danger-glow: rgba(244, 63, 94, 0.3);
+    
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- 2. Header Dinámico --- */
+.admin-header {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(to right, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.admin-header-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid var(--card-border);
+}
+
+.admin-header-user img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- 3. Contenedor Principal (Grid Flexible) --- */
+.admin-container {
+    width: 92%;
+    max-width: 1350px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .admin-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- 4. Formulario Estilo Glassmorphic --- */
+.admin-form {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 100px;
+    animation: fadeInSlide 0.6s ease-out;
+}
+
+.admin-form h2 {
+    margin: 0 0 24px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--text-light);
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.admin-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.admin-form button.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 12px var(--primary-glow);
+    margin-top: 6px;
+}
+
+.admin-form button.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.admin-form button.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* --- 5. Lista de Productos Avanzada --- */
+.admin-products-section h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.admin-product {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto visual de barra brillante lateral al pasar el mouse */
+.admin-product::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--primary);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.admin-product:hover {
+    transform: translateY(-4px) scale(1.01);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.admin-product:hover::before {
+    opacity: 1;
+}
+
+.admin-product-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-product-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.admin-product-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 16px;
+}
+
+/* --- 6. Acciones (Botones Interactivos) --- */
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-actions button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.admin-btn-edit {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-btn-edit:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.admin-btn-delete {
+    background: rgba(244, 63, 94, 0.1);
+    color: var(--danger);
+    border-color: rgba(244, 63, 94, 0.2);
+}
+
+.admin-btn-delete:hover {
+    background: var(--danger);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--danger-glow);
+}
+
+/* --- 7. Animaciones Generales --- */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-locked { visibility: hidden; }
+.admin-locked.admin-ready { visibility: visible; }
+.admin-header-actions { display:flex; gap:10px; align-items:center; }
+.admin-back { color:inherit; text-decoration:none; padding:10px 14px; border:1px solid rgba(255,255,255,.12); border-radius:10px; }
+.admin-kicker { margin:0 0 4px; opacity:.65; font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; }
+.admin-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-bottom:30px; }
+.form-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.check-row { display:flex!important; align-items:center; gap:8px; cursor:pointer; }
+.check-row input { width:auto!important; }
+.image-preview { min-height:10px; }
+.image-preview img { width:100%; max-height:220px; object-fit:cover; border-radius:12px; margin-top:8px; border:1px solid rgba(255,255,255,.1); }
+.admin-thumb { width:64px; height:64px; object-fit:cover; border-radius:10px; flex:none; }
+@media (max-width: 850px) { .admin-grid { grid-template-columns:1fr; } .admin-header { gap:15px; } .admin-header-actions { flex-wrap:wrap; } }
