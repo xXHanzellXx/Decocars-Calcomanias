@@ -16,11 +16,12 @@
     </div>
     <div class="admin-header-actions">
       <a href="index.html" class="admin-back">Ver catálogo</a>
-      <button id="logout-btn" type="button">Cerrar sesión</button>
+      <button id="logout-btn" type="button" class="btn btn-secondary">Cerrar sesión</button>
     </div>
   </header>
 
   <main class="admin-container">
+    <!-- Columna Izquierda: Formularios de Calcomanías y Categorías apilados -->
     <section class="admin-grid">
       <div class="admin-form">
         <h2 id="product-form-title">Agregar calcomanía</h2>
@@ -75,13 +76,33 @@
       </div>
     </section>
 
+    <!-- Columna Derecha: Sección de Productos -->
     <section class="admin-products-section">
-      <div class="admin-section-head"><div><h2>Productos guardados en la base de datos</h2><p id="admin-products-info"></p></div><div class="admin-list-tools"><input id="admin-product-search" type="search" placeholder="Buscar productos…" autocomplete="off"><button id="admin-prev" type="button" class="btn btn-secondary">Anterior</button><button id="admin-next" type="button" class="btn btn-secondary">Siguiente</button></div></div>
+      <div class="admin-section-head">
+        <div>
+          <h2>Productos guardados en la base de datos</h2>
+          <p id="admin-products-info"></p>
+        </div>
+        <div class="admin-list-tools">
+          <input id="admin-product-search" type="search" placeholder="Buscar productos…" autocomplete="off">
+          <button id="admin-prev" type="button" class="btn btn-secondary">Anterior</button>
+          <button id="admin-next" type="button" class="btn btn-secondary">Siguiente</button>
+        </div>
+      </div>
       <div id="admin-products"></div>
     </section>
 
+    <!-- Columna Derecha: Sección de Categorías Independiente con Buscador e Info -->
     <section class="admin-products-section">
-      <h2>Categorías</h2>
+      <div class="admin-section-head">
+        <div>
+          <h2>Categorías guardadas en la base de datos</h2>
+          <p id="admin-categories-info"></p>
+        </div>
+        <div class="admin-list-tools">
+          <input id="admin-category-search" type="search" placeholder="Buscar categorías…" autocomplete="off">
+        </div>
+      </div>
       <div id="admin-categories"></div>
     </section>
   </main>
