@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+      content="Decocars — Catálogo digital de calcomanías de vinilo premium." />
+    <title id="page-title">Decocars</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Favicon emoji -->
+    <link rel="icon" href="logo.png" type="image/png" />
+  </head>
+  <body>
+
+    <!-- ═══════════════════════════════════════════════
+      NAVBAR
+═══════════════════════════════════════════════ -->
+    <nav id="navbar">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="#hero" class="nav-logo" id="nav-logo">
+          <img src="logo.png" alt="Decocars Logo" style="height: 32px; width: auto; object-fit: contain;" />
+          <span id="nav-brand"></span>
+        </a>
+
+        <!-- Links desktop -->
+        <div class="nav-links">
+          <a href="#hero" class="nav-link active" data-section="hero">Inicio</a>
+          <a href="#categories" class="nav-link"
+            data-section="categories">Categorías</a>
+          <a href="#catalog" class="nav-link"
+            data-section="catalog">Catálogo</a>
+        </div>
+
+        <!-- Acciones -->
+        <div class="nav-actions">
+          <!-- Buscador rápido (desktop) -->
+          <div class="search-wrap" style="max-width:200px; display:none;"
+            id="nav-search-wrap">
+            <svg class="search-icon" width="14" height="14" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            </svg>
+            <input id="nav-search-input" class="search-input" type="text"
+              placeholder="Buscar…" autocomplete="off" />
+          </div>
+
+          <button id="login-btn" class="login-btn">
+            Iniciar sesión
+          </button>
+
+          <button id="admin-panel-btn" class="btn-login" style="display:none;">
+            Panel de Administración
+          </button>
+
+          <!-- Botón buscar -->
+          <button class="icon-btn" id="search-toggle-btn" title="Buscar"
+            aria-label="Buscar">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            </svg>
+          </button>
+
+          <!-- Modo oscuro -->
+          <button class="icon-btn" id="dark-toggle" title="Alternar modo oscuro"
+            aria-label="Alternar modo oscuro">
+            <svg id="icon-moon" width="15" height="15" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg id="icon-sun" width="15" height="15" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              style="display:none;">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21"
+                x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36"
+                y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12"
+                x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36"
+                y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </button>
+
+          <!-- Menú hamburguesa (mobile) -->
+          <button class="icon-btn" id="mobile-menu-btn"
+            title="Menú" aria-label="Abrir menú">
+            <svg id="ham-open" width="15" height="15" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21"
+                y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            <svg id="ham-close" width="15" height="15" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              style="display:none;">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18"
+                y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu">
+        <a href="#hero" class="mobile-nav-link"
+          onclick="closeMobileMenu()">Inicio</a>
+        <a href="#categories" class="mobile-nav-link"
+          onclick="closeMobileMenu()">Categorías</a>
+        <a href="#catalog" class="mobile-nav-link"
+          onclick="closeMobileMenu()">Catálogo</a>
+        <button id="mobile-login-btn" class="mobile-nav-link mobile-nav-button" type="button">Iniciar sesión</button>
+        <button id="mobile-admin-btn" class="mobile-nav-link mobile-nav-button" type="button" style="display:none;">Panel de Administración</button>
+        <!-- Search en mobile -->
+        <div class="search-wrap" style="max-width:100%; margin-top:.5rem;">
+          <svg class="search-icon" width="14" height="14" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+          </svg>
+          <input id="mobile-search-input" class="search-input" type="text"
+            placeholder="Buscar productos…" autocomplete="off" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════
+      HERO
+═══════════════════════════════════════════════ -->
+    <section id="hero">
+      <!-- Decoraciones de fondo -->
+      <div class="hero-grid"></div>
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+
+      <div class="hero-inner">
+        <!-- Columna izquierda: texto -->
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal">
+            <span class="eyebrow-dot">✦</span>
+            Colección — Vinilo Premium
+          </div>
+
+          <h1 class="hero-title reveal d1">
+            Calcomanías que<br>
+            <span class="accent">definen</span><br>
+            <span class="italic">tu estilo</span>
+          </h1>
+
+          <p class="hero-desc reveal d2">
+            Diseños originales en vinilo de alta durabilidad. Resistentes al
+            agua, UV y el tiempo.
+            Para laptops, botellas, autos y todo lo que quieras personalizar con
+            clase.
+          </p>
+
+          <div class="hero-actions reveal d3">
+            <a href="#catalog" class="btn btn-primary">
+              <svg width="15" height="15" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2.5">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+              Ver catálogo
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="hero-stats reveal d4">
+            <div class="stat"><div class="stat-num" id="stat-designs">—</div><div class="stat-label">Diseños</div></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><div class="stat-num" id="stat-categories">—</div><div class="stat-label">Categorías</div></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><div class="stat-num" id="stat-featured">—</div><div class="stat-label">Destacados</div></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><div class="stat-num" id="stat-country">CR</div><div class="stat-label">Ubicación</div></div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: tarjetas flotantes -->
+        <div class="hero-visual">
+          <div class="hero-canvas">
+            <div id="featured-card-1" class="float-card reveal d1" style="top:0; left:50%; transform:translateX(-50%);">
+              <div class="fc-icon">✨</div><div><div class="fc-name">Cargando…</div><div class="fc-cat">Destacado</div><div class="fc-price">—</div></div>
+            </div>
+            <div id="featured-card-2" class="float-card reveal d2" style="bottom:80px; left:0;">
+              <div class="fc-icon">✨</div><div><div class="fc-name">Cargando…</div><div class="fc-cat">Destacado</div><div class="fc-price">—</div></div>
+            </div>
+            <div id="featured-card-3" class="float-card reveal d3" style="bottom:20px; right:0;">
+              <div class="fc-icon">✨</div><div><div class="fc-name">Cargando…</div><div class="fc-cat">Destacado</div><div class="fc-price">—</div></div>
+            </div>
+            <div class="hero-badge-pill reveal d4" style="top:120px; right:-10px;">✦ Premium</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      MARQUEE
+═══════════════════════════════════════════════ -->
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <!-- Primera copia -->
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Vinilo
+          premium</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Resistente
+          al agua</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Envío a
+          todo el país</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Diseños
+          exclusivos</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Ediciones
+          limitadas</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Anti-UV
+          certificado</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Fácil
+          aplicación</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> 100%
+          original</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Garantía
+          30 días</span>
+        <!-- Segunda copia (loop) -->
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Vinilo
+          premium</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Resistente
+          al agua</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Envío a
+          todo el país</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Diseños
+          exclusivos</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Ediciones
+          limitadas</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Anti-UV
+          certificado</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Fácil
+          aplicación</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> 100%
+          original</span>
+        <span class="marquee-item"><span class="marquee-sep">◆</span> Garantía
+          30 días</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+      CATEGORÍAS
+═══════════════════════════════════════════════ -->
+    <section id="categories" class="categories-section"
+      style="padding: 5rem 0;">
+      <div class="section-wrap">
+        <div class="section-header reveal">
+          <div class="section-label">Colecciones</div>
+          <h2 class="section-title">Explora por categoría</h2>
+          <p class="section-desc">Encuentra el diseño perfecto filtrando por tu
+            estilo favorito.</p>
+        </div>
+
+        <!-- Skeleton categorías -->
+        <div id="categories-skeleton" class="category-grid">
+          <div class="skeleton-card" style="height:120px;"></div>
+          <div class="skeleton-card" style="height:120px;"></div>
+          <div class="skeleton-card" style="height:120px;"></div>
+          <div class="skeleton-card" style="height:120px;"></div>
+          <div class="skeleton-card" style="height:120px;"></div>
+          <div class="skeleton-card" style="height:120px;"></div>
+        </div>
+
+        <!-- Grid categorías -->
+        <div id="categories-grid" class="category-grid"
+          style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      CATÁLOGO COMPLETO
+═══════════════════════════════════════════════ -->
+    <section id="catalog" style="padding: 5rem 0;">
+      <div class="section-wrap">
+        <div class="section-header">
+          <div class="reveal">
+            <div class="section-label">Catálogo</div>
+            <h2 class="section-title">Todos los diseños</h2>
+            <p class="section-desc">Explora nuestra colección completa. Usa los
+              filtros para encontrar lo que buscas.</p>
+          </div>
+        </div>
+
+        <!-- Barra de filtros + búsqueda -->
+        <div class="filter-bar reveal">
+          <!-- Search -->
+          <div class="search-wrap">
+            <svg class="search-icon" width="14" height="14" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            </svg>
+            <input id="catalog-search" class="search-input" type="text"
+              placeholder="Buscar diseños…" autocomplete="off" />
+          </div>
+
+          <!-- Filtros de categoría -->
+          <div id="filter-pills"
+            style="display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;">
+            <button class="filter-pill active" data-filter="all">Todos</button>
+            <!-- Se añaden dinámicamente -->
+          </div>
+
+          <!-- Ordenar -->
+          <select id="sort-select" class="search-input"
+            style="max-width:170px; padding-left:.85rem; cursor:pointer;">
+            <option value="createdAt_desc">Más recientes</option>
+            <option value="price_asc">Precio: menor a mayor</option>
+            <option value="price_desc">Precio: mayor a menor</option>
+            <option value="name_asc">Nombre A–Z</option>
+          </select>
+        </div>
+
+        <!-- Contador de resultados -->
+        <div id="result-info"
+          style="font-size:.82rem; color:var(--ink-muted); margin-bottom:1.5rem; min-height:1.2em;"></div>
+
+        <!-- Skeletons catálogo -->
+        <div id="catalog-skeleton" class="products-grid">
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+          <div class="skeleton-card"><div class="skeleton sk-img"></div><div
+              class="sk-body"><div class="skeleton sk-line"></div><div
+                class="skeleton sk-line sk-short"></div><div
+                class="skeleton sk-price"></div></div></div>
+        </div>
+
+        <!-- Grid catálogo real -->
+        <div id="catalog-grid" class="products-grid"
+          style="display:none;"></div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="empty-state" style="display:none;">
+          <div class="empty-emoji">🔍</div>
+          <div class="empty-title">Sin resultados</div>
+          <div class="empty-desc">Intenta con otro término de búsqueda o
+            selecciona otra categoría.</div>
+        </div>
+
+        <!-- Paginación / Cargar más -->
+        <div id="pagination-wrap"
+          style="display:none; text-align:center; margin-top:2.5rem;">
+          <button id="load-more-btn" class="btn btn-secondary">
+            Cargar más diseños
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2.5">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      CTA SECTION
+═══════════════════════════════════════════════ -->
+    <section class="cta-section">
+      <div class="cta-inner section-wrap">
+        <div class="reveal">
+          <h2 class="cta-title">¿Listo para personalizar<br>tu mundo?</h2>
+          <p class="cta-desc">
+            Explora todo el catálogo, encuentra el diseño que te representa y
+            recíbelo directamente en tu puerta.
+          </p>
+          <div
+            style="display:flex; flex-wrap:wrap; gap:.85rem; justify-content:center;">
+            <a href="#catalog" class="btn btn-white">
+              Ver catálogo completo
+            </a>
+            <a href="mailto:hola@decocars.cr" class="btn btn-ghost">
+              Contáctanos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      FOOTER
+═══════════════════════════════════════════════ -->
+    <footer>
+      <div class="section-wrap footer-simple">
+        <div class="footer-left">
+          <a href="#hero" class="nav-logo">
+            <img src="logo.png" alt="Decocars Logo" style="height: 28px; width: auto; object-fit: contain;" />
+            <span id="footer-brand"></span>
+          </a>
+          <p class="footer-brand-desc">
+            Ideas que se adhieren a tu estilo.
+          </p>
+        </div>
+        <div class="footer-center">
+          <a href="#hero">Inicio</a>
+          <a href="#categories">Categorías</a>
+          <a href="#catalog">Catálogo</a>
+        </div>
+        <div class="footer-right">
+          <p id="footer-copy"></p>
+          <p>Hecho en Costa Rica 🇨🇷</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===========================================
+      MODAL LOGIN ADMINISTRADOR
+=========================================== -->
+    <div id="login-modal" class="login-modal">
+      <div class="login-card">
+        <button id="close-login" class="login-close">
+          ✕
+        </button>
+        <h2>Acceso administrativo</h2>
+        <p class="login-info">
+          Este acceso está destinado exclusivamente al administrador responsable
+          de la gestión del catálogo de Decocars.
+          <br><br>
+          Los visitantes pueden consultar todos los productos sin necesidad de
+          iniciar sesión.
+        </p>
+        <form id="login-form">
+          <label>Correo electrónico</label>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="admin@calcodesign.com"
+            required>
+          <label>Contraseña</label>
+          <input
+            type="password"
+            id="login-password"
+            placeholder="••••••••"
+            required>
+          <button type="submit" class="login-submit">
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+      MODAL DETALLE DE PRODUCTO
+═══════════════════════════════════════════════ -->
+    <div class="modal-backdrop" id="product-modal" role="dialog"
+      aria-modal="true" aria-labelledby="modal-name-el">
+      <div class="modal-box">
+        <!-- Imagen / Emoji -->
+        <div class="modal-image" id="modal-image-area"
+          style="position:relative;">
+          <span class="modal-image-emoji" id="modal-emoji-el"></span>
+          <!-- Badge dentro del modal -->
+          <span id="modal-badge-el" class="card-badge"
+            style="position:absolute; top:.85rem; left:.85rem;"></span>
+          <!-- Botón cerrar -->
+          <button class="modal-close" id="modal-close-btn"
+            aria-label="Cerrar">✕</button>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="modal-body">
+          <div class="modal-category" id="modal-category-el"></div>
+          <h2 class="modal-name" id="modal-name-el"></h2>
+          <p class="modal-desc" id="modal-desc-el"></p>
+
+          <!-- Tags -->
+          <div class="modal-tags" id="modal-tags-el"></div>
+
+          <!-- Footer del modal -->
+          <div class="modal-footer">
+            <span class="modal-price" id="modal-price-el"></span>
+            <div style="display:flex; gap:.65rem;">
+              <button class="btn btn-secondary" id="modal-close-btn2"
+                style="font-size:.8rem; padding:.55rem 1.1rem;">
+                Cerrar
+              </button>
+              <a href="#" target="_blank"
+                class="btn btn-primary"
+                style="font-size:.8rem; padding:.6rem 1.2rem;">
+                <svg width="14" height="14" fill="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                </svg>
+                Consultar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+      TOAST NOTIFICATION
+═══════════════════════════════════════════════ -->
+    <div id="toast" role="alert" aria-live="polite">
+      <span class="toast-icon" id="toast-icon">✓</span>
+      <span id="toast-message">Mensaje</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+      SCRIPTS
+═══════════════════════════════════════════════ -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+
+  </body>
+</html>

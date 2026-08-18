@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador | Decocars</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body data-page="admin" class="admin-locked">
+  <header class="admin-header">
+    <div>
+      <p class="admin-kicker">Decocars</p>
+      <h1>Panel de Administración</h1>
+      <span id="admin-name">Verificando sesión…</span>
+    </div>
+    <div class="admin-header-actions">
+      <a href="index.html" class="admin-back">Ver catálogo</a>
+      <button id="logout-btn" type="button">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <section class="admin-grid">
+      <div class="admin-form">
+        <h2 id="product-form-title">Agregar calcomanía</h2>
+        <form id="product-form">
+          <input id="product-name" type="text" placeholder="Nombre" maxlength="120" required>
+          <textarea id="product-description" placeholder="Descripción" maxlength="1000" required></textarea>
+          <input id="product-price" type="number" min="0" step="1" placeholder="Precio en colones" required>
+
+          <label for="product-image">Imagen del producto</label>
+          <input id="product-image" type="file" accept="image/*">
+          <input id="product-image-existing" type="hidden">
+          <div id="product-image-preview" class="image-preview"></div>
+
+          <label for="product-emoji">Emoji si no usa imagen</label>
+          <input id="product-emoji" type="text" maxlength="20" value="🏷️" placeholder="🌸">
+
+          <label for="product-category">Categoría</label>
+          <input id="product-category" list="category-list" placeholder="Naturaleza" required>
+          <datalist id="category-list">
+            <option value="Naturaleza"><option value="Astral"><option value="Retro"><option value="Minimal">
+            <option value="Animales"><option value="Arte"><option value="Urbano"><option value="Especial">
+          </datalist>
+
+          <input id="product-badge" type="text" maxlength="30" placeholder="Etiqueta: Nuevo, Limitado, etc.">
+          <input id="product-tags" type="text" maxlength="300" placeholder="Etiquetas separadas por coma: flores, rosa, sakura">
+
+          <label class="check-row"><input id="product-featured" type="checkbox" checked> Mostrar como destacado</label>
+          <label class="check-row"><input id="product-available" type="checkbox" checked> Mostrar en el catálogo</label>
+
+          <div class="form-actions">
+            <button id="product-submit" class="btn btn-primary" type="submit">Guardar producto</button>
+            <button id="product-cancel" class="btn btn-secondary" type="button" style="display:none;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="admin-form">
+        <h2 id="category-form-title">Agregar categoría</h2>
+        <form id="category-form">
+          <input id="category-name" type="text" maxlength="80" placeholder="Nombre de categoría" required>
+          <input id="category-emoji" type="text" maxlength="20" value="📌" placeholder="🌿">
+          <label for="category-image">Imagen de la categoría</label>
+          <input id="category-image" type="file" accept="image/*">
+          <input id="category-image-existing" type="hidden">
+          <div id="category-image-preview" class="image-preview"></div>
+          <label class="check-row"><input id="category-active" type="checkbox" checked> Mostrar categoría</label>
+          <div class="form-actions">
+            <button id="category-submit" class="btn btn-primary" type="submit">Guardar categoría</button>
+            <button id="category-cancel" class="btn btn-secondary" type="button" style="display:none;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-products-section">
+      <div class="admin-section-head"><div><h2>Productos guardados en la base de datos</h2><p id="admin-products-info"></p></div><div class="admin-list-tools"><input id="admin-product-search" type="search" placeholder="Buscar productos…" autocomplete="off"><button id="admin-prev" type="button" class="btn btn-secondary">Anterior</button><button id="admin-next" type="button" class="btn btn-secondary">Siguiente</button></div></div>
+      <div id="admin-products"></div>
+    </section>
+
+    <section class="admin-products-section">
+      <h2>Categorías</h2>
+      <div id="admin-categories"></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/image.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
