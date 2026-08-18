@@ -5,5 +5,5 @@
 */
 window.APP_CONFIG = {
   API_BASE: "https://decocars-calcomanias.onrender.com/api",
-  WHATSAPP: ""
+  WHATSAPP: "50663049342"
 };
