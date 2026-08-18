@@ -5,7 +5,6 @@
     --card-bg: rgba(30, 41, 59, 0.7);
     --card-border: rgba(255, 255, 255, 0.08);
     
-    /* Mapeo estandarizado para evitar conflictos de variables faltantes */
     --surface: rgba(15, 23, 42, 0.6);
     --border: rgba(255, 255, 255, 0.1);
     --ink: #f8fafc;
@@ -102,7 +101,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* --- 3. Contenedor Principal (Grid Principal: Sidebar de Formularios | Contenido) --- */
+/* --- 3. Contenedor Principal Grid (Sidebar Izquierda | Secciones de la Derecha) --- */
 .admin-container {
     width: 92%;
     max-width: 1350px;
@@ -113,7 +112,7 @@ body {
     align-items: start;
 }
 
-/* --- 4. Formularios y Sidebar Izquierda (.admin-grid corregido a columna vertical) --- */
+/* --- 4. Sidebar Izquierda (Formularios Apilados) --- */
 .admin-grid {
     display: flex;
     flex-direction: column;
@@ -121,6 +120,7 @@ body {
     position: sticky;
     top: 100px;
     margin-bottom: 0;
+    z-index: 10;
 }
 
 .admin-form {
@@ -243,13 +243,10 @@ body {
     box-shadow: 0 6px 20px var(--primary-glow);
 }
 
-.admin-form button.btn-primary:active {
-    transform: translateY(0);
-}
-
-/* --- 5. Lista de Productos y Secciones de la Derecha --- */
+/* --- 5. Secciones de la Derecha (Productos y Categorías) --- */
 .admin-products-section {
     margin-bottom: 30px;
+    grid-column: 2; /* Forzamos que queden en la columna derecha del grid principal */
 }
 
 .admin-products-section h2 {
@@ -271,7 +268,8 @@ body {
     margin-bottom: .25rem;
 }
 
-#admin-products-info {
+#admin-products-info,
+#admin-categories-info {
     margin: 0;
     opacity: .7;
     font-size: .9rem;
@@ -303,6 +301,7 @@ body {
     cursor: not-allowed;
 }
 
+/* --- 6. Tarjetas de Productos y Categorías --- */
 .admin-product {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
@@ -372,7 +371,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* --- 6. Acciones (Botones Interactivos) --- */
+/* --- 7. Botones de Acción --- */
 .admin-actions {
     display: flex;
     gap: 10px;
@@ -413,7 +412,7 @@ body {
     box-shadow: 0 4px 15px var(--danger-glow);
 }
 
-/* --- 7. Utilidades y Animaciones --- */
+/* --- 8. Animaciones y Media Queries --- */
 @keyframes fadeInSlide {
     from {
         opacity: 0;
@@ -428,7 +427,6 @@ body {
 .admin-locked { visibility: hidden; }
 .admin-locked.admin-ready { visibility: visible; }
 
-/* --- 8. Media Queries Responsivas --- */
 @media (max-width: 1024px) {
     .admin-container {
         grid-template-columns: 1fr;
@@ -438,6 +436,10 @@ body {
     .admin-grid {
         position: relative !important;
         top: 0 !important;
+    }
+
+    .admin-products-section {
+        grid-column: 1;
     }
 }
 
