@@ -1723,3 +1723,194 @@ html.dark .login-btn:hover {
 .float-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .mobile-nav-button { width:100%; border:0; background:transparent; text-align:left; cursor:pointer; font-family:inherit; }
+
+
+/* ═══════════════════════════════════════════════
+   TARJETAS DE PRODUCTOS — DISEÑO MEJORADO
+   Ajuste final para nombre, descripción, precio y botón
+═══════════════════════════════════════════════ */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+  border-color: var(--blue-300);
+}
+
+/* Imagen de producto */
+.product-image-wrap,
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 200px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  position: relative;
+}
+
+.product-image-wrap img,
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.product-card:hover .product-image-wrap img,
+.product-card:hover .card-image img {
+  transform: scale(1.06);
+}
+
+/* Contenido de la tarjeta */
+.card-body,
+.product-card-body {
+  position: relative;
+  padding: 1rem 1.1rem 1.15rem;
+  min-height: 155px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Categoría */
+.card-category {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.25rem 0.55rem;
+  margin-bottom: 0.45rem;
+  background: var(--blue-50);
+  color: var(--blue-700);
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Nombre del producto */
+.card-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+  margin: 0 0 0.4rem;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Descripción */
+.card-desc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--ink-mid);
+  line-height: 1.5;
+  margin: 0 0 0.9rem;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Precio */
+.card-price {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* Botón "Ver más" */
+.card-action {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 1.05rem;
+
+  opacity: 0;
+  transform: translateY(5px);
+
+  padding: 0.45rem 0.8rem;
+  border: 0;
+  border-radius: 8px;
+
+  background: var(--blue-600);
+  color: white;
+
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.product-card:hover .card-action {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-action:hover {
+  background: var(--blue-700);
+  transform: translateY(-1px);
+}
+
+/* En dispositivos táctiles el botón siempre está visible */
+@media (hover: none) {
+  .card-action {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modo oscuro */
+.dark .card-category {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--blue-300);
+}
+
+/* Tarjetas pequeñas en móviles */
+@media (max-width: 480px) {
+  .card-body,
+  .product-card-body {
+    min-height: 145px;
+    padding: 0.85rem 0.9rem 1rem;
+  }
+
+  .card-name {
+    font-size: 0.95rem;
+  }
+
+  .card-desc {
+    font-size: 0.74rem;
+  }
+
+  .card-price {
+    font-size: 1rem;
+  }
+
+  .card-action {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    padding: 0.4rem 0.65rem;
+  }
+}
