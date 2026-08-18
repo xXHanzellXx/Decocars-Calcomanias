@@ -1725,40 +1725,154 @@ html.dark .login-btn:hover {
 .mobile-nav-button { width:100%; border:0; background:transparent; text-align:left; cursor:pointer; font-family:inherit; }
 
 
-/* ═══════════════════════════════════════════════
-   TARJETAS DE PRODUCTOS — DISEÑO MEJORADO
-   Ajuste final para nombre, descripción, precio y botón
-═══════════════════════════════════════════════ */
+/* =========================================================
+   DECOCARS — MEJORA VISUAL COMPLETA
+   SOLO CSS — NO REQUIERE CAMBIOS EN HTML
+   ========================================================= */
+
+/* ---------- Variables visuales ---------- */
+:root {
+  --blue-950: #07111f;
+  --blue-900: #0b1b33;
+  --blue-800: #102b52;
+  --blue-700: #1554c7;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-300: #93c5fd;
+  --blue-200: #bfdbfe;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+
+  --surface: #ffffff;
+  --bg: #f4f7fb;
+  --bg-alt: #edf4ff;
+  --border: #dce5f0;
+  --ink: #0f172a;
+  --ink-mid: #526176;
+  --ink-muted: #8290a5;
+  --accent: #2563eb;
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --shadow-xs: 0 2px 6px rgba(15, 23, 42, .05);
+  --shadow-sm: 0 5px 16px rgba(15, 23, 42, .08);
+  --shadow-md: 0 10px 28px rgba(15, 23, 42, .11);
+  --shadow-lg: 0 18px 45px rgba(15, 23, 42, .14);
+  --shadow-xl: 0 24px 60px rgba(15, 23, 42, .18);
+  --shadow-blue: 0 10px 30px rgba(37, 99, 235, .28);
+}
+
+.dark {
+  --surface: #111b2b;
+  --bg: #070d17;
+  --bg-alt: #0d1828;
+  --border: #21324b;
+  --ink: #f4f8ff;
+  --ink-mid: #a9bad3;
+  --ink-muted: #71849f;
+  --accent: #60a5fa;
+
+  --shadow-xs: 0 2px 8px rgba(0, 0, 0, .22);
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, .28);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, .35);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, .42);
+  --shadow-xl: 0 28px 70px rgba(0, 0, 0, .5);
+  --shadow-blue: 0 10px 30px rgba(59, 130, 246, .25);
+}
+
+/* ---------- Fondo general ---------- */
+body {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(59, 130, 246, .07), transparent 28rem),
+    radial-gradient(circle at 92% 15%, rgba(96, 165, 250, .05), transparent 28rem),
+    var(--bg);
+}
+
+/* =========================================================
+   TARJETAS DE PRODUCTOS
+   ========================================================= */
+
+.products-grid {
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 1.5rem;
+}
+
+.featured-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
 
 .product-card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    border-color 0.25s ease;
+  box-shadow: var(--shadow-sm);
   position: relative;
+  isolation: isolate;
+  transition:
+    transform .3s cubic-bezier(.2,.8,.2,1),
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, .35);
+  transition: opacity .3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
-  border-color: var(--blue-300);
+  transform: translateY(-8px);
+  border-color: rgba(59, 130, 246, .38);
+  box-shadow: var(--shadow-xl);
 }
 
-/* Imagen de producto */
+.product-card:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Imagen ---------- */
+
 .product-image-wrap,
 .card-image {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  min-height: 200px;
+  height: 235px;
+  min-height: 235px;
+  aspect-ratio: auto;
   overflow: hidden;
-  background: var(--bg-alt);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(59, 130, 246, .12), transparent 55%),
+    linear-gradient(145deg, var(--blue-50), #f8fbff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+}
+
+.product-image-wrap::after,
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    rgba(7, 17, 31, .08)
+  );
+  pointer-events: none;
 }
 
 .product-image-wrap img,
@@ -1767,62 +1881,122 @@ html.dark .login-btn:hover {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.45s ease;
+  transition:
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    filter .4s ease;
 }
 
 .product-card:hover .product-image-wrap img,
 .product-card:hover .card-image img {
-  transform: scale(1.06);
+  transform: scale(1.07);
 }
 
-/* Contenido de la tarjeta */
+/* Para emojis/productos sin imagen */
+.product-image-emoji,
+.card-image-inner {
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+.product-card:hover .product-image-emoji,
+.product-card:hover .card-image-inner {
+  transform: scale(1.1) translateY(-3px);
+}
+
+/* ---------- Badge ---------- */
+
+.card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 4;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 14px rgba(0,0,0,.15);
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+}
+
+.badge-limited {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+}
+
+.badge-bestseller {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+}
+
+/* ---------- Contenido ---------- */
+
 .card-body,
 .product-card-body {
   position: relative;
-  padding: 1rem 1.1rem 1.15rem;
-  min-height: 155px;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  padding: 1.15rem 1.2rem 1.2rem;
+  min-width: 0;
+  background: var(--surface);
 }
 
-/* Categoría */
 .card-category {
+  width: fit-content;
   display: inline-flex;
   align-items: center;
-  width: fit-content;
-  padding: 0.25rem 0.55rem;
-  margin-bottom: 0.45rem;
+  padding: 5px 9px;
+  margin: 0 0 8px;
+
+  border-radius: 7px;
   background: var(--blue-50);
   color: var(--blue-700);
-  border-radius: 6px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .09em;
   text-transform: uppercase;
 }
 
-/* Nombre del producto */
+.dark .card-category {
+  background: rgba(59, 130, 246, .11);
+  color: var(--blue-300);
+}
+
 .card-name {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 800;
   color: var(--ink);
   line-height: 1.25;
-  margin: 0 0 0.4rem;
+  letter-spacing: -.015em;
+
+  margin: 0 0 7px;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  transition: color .2s ease;
 }
 
-/* Descripción */
+.product-card:hover .card-name {
+  color: var(--accent);
+}
+
 .card-desc {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: .79rem;
   color: var(--ink-mid);
-  line-height: 1.5;
-  margin: 0 0 0.9rem;
+  line-height: 1.55;
+
+  margin: 0;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1830,87 +2004,386 @@ html.dark .login-btn:hover {
   overflow: hidden;
 }
 
-/* Precio */
+/* ---------- Zona inferior ---------- */
+
 .card-price {
   margin-top: auto;
-  padding-top: 0.75rem;
+  padding-top: 1rem;
+
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: var(--ink);
+  letter-spacing: -.02em;
 }
 
-/* Botón "Ver más" */
+.card-price::first-letter {
+  color: var(--accent);
+}
+
+/* ---------- Botón Ver más ---------- */
+
 .card-action {
   position: absolute;
-  right: 1.1rem;
+  right: 1.15rem;
   bottom: 1.05rem;
 
-  opacity: 0;
-  transform: translateY(5px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
 
-  padding: 0.45rem 0.8rem;
+  min-height: 36px;
+  padding: .5rem .85rem;
+
   border: 0;
-  border-radius: 8px;
+  border-radius: 9px;
 
-  background: var(--blue-600);
-  color: white;
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+  color: #fff;
 
   font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: .72rem;
+  font-weight: 800;
 
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 5px 14px rgba(37, 99, 235, .25);
+
+  opacity: 0;
+  transform: translateY(7px);
+
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    box-shadow .22s ease,
+    filter .22s ease;
 }
 
-.product-card:hover .card-action {
+.product-card:hover .card-action,
+.card-action:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 .card-action:hover {
-  background: var(--blue-700);
-  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, .38);
 }
 
-/* En dispositivos táctiles el botón siempre está visible */
+.card-action:active {
+  transform: translateY(1px) scale(.97);
+}
+
+/* =========================================================
+   BOTONES GENERALES — MÁS MODERNOS
+   ========================================================= */
+
+.btn,
+.login-submit,
+.login-btn,
+.filter-pill {
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1554c7);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, .25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 30px rgba(37, 99, 235, .35);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translateY(0) scale(.98);
+}
+
+.btn-secondary:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-300);
+  color: var(--blue-700);
+}
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.filter-bar {
+  gap: .65rem;
+}
+
+.filter-pill {
+  border-radius: 999px;
+  padding: .5rem 1rem;
+  font-weight: 650;
+}
+
+.filter-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue-300);
+  color: var(--blue-700);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+  border-color: transparent;
+  box-shadow: 0 7px 18px rgba(37, 99, 235, .25);
+}
+
+/* =========================================================
+   BUSCADOR
+   ========================================================= */
+
+.search-input {
+  border-radius: 12px;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    transform .2s ease;
+}
+
+.search-input:hover {
+  border-color: var(--blue-300);
+}
+
+.search-input:focus {
+  transform: translateY(-1px);
+  border-color: var(--blue-400);
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, .1),
+    var(--shadow-sm);
+}
+
+/* =========================================================
+   CATEGORÍAS
+   ========================================================= */
+
+.category-card {
+  border-radius: 17px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(59, 130, 246, .4);
+}
+
+.category-card-icon {
+  transition: transform .3s ease;
+}
+
+.category-card:hover .category-card-icon {
+  transform: scale(1.12) translateY(-2px);
+}
+
+/* =========================================================
+   NAVBAR / ICONOS
+   ========================================================= */
+
+.icon-btn {
+  border-radius: 11px;
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: var(--blue-50);
+  border-color: var(--blue-300);
+  box-shadow: var(--shadow-sm);
+}
+
+.dark .icon-btn:hover {
+  background: rgba(59, 130, 246, .1);
+}
+
+/* =========================================================
+   MODALES
+   ========================================================= */
+
+.modal-box,
+.login-card {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+}
+
+.modal-box {
+  border-radius: 22px;
+}
+
+.modal-close,
+.login-close {
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    color .2s ease;
+}
+
+.modal-close:hover,
+.login-close:hover {
+  transform: rotate(90deg);
+  color: var(--accent);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer-link,
+.footer-center a {
+  transition:
+    color .2s ease,
+    transform .2s ease;
+}
+
+.footer-link:hover,
+.footer-center a:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+.admin-product {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.admin-product:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue-300);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   ACCIONES EN MÓVIL
+   ========================================================= */
+
 @media (hover: none) {
   .card-action {
     opacity: 1;
     transform: translateY(0);
   }
+
+  .product-card:hover {
+    transform: none;
+  }
 }
 
-/* Modo oscuro */
-.dark .card-category {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--blue-300);
+/* =========================================================
+   RESPONSIVE DE TARJETAS
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .products-grid,
+  .featured-grid {
+    gap: 1rem;
+  }
+
+  .product-image-wrap,
+  .card-image {
+    height: 210px;
+    min-height: 210px;
+  }
+
+  .product-card:hover {
+    transform: translateY(-3px);
+  }
 }
 
-/* Tarjetas pequeñas en móviles */
 @media (max-width: 480px) {
+  .products-grid,
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+  }
+
+  .product-image-wrap,
+  .card-image {
+    height: 175px;
+    min-height: 175px;
+  }
+
   .card-body,
   .product-card-body {
+    padding: .85rem;
     min-height: 145px;
-    padding: 0.85rem 0.9rem 1rem;
+  }
+
+  .card-category {
+    font-size: .58rem;
+    padding: 4px 7px;
   }
 
   .card-name {
-    font-size: 0.95rem;
+    font-size: .92rem;
   }
 
   .card-desc {
-    font-size: 0.74rem;
+    font-size: .7rem;
   }
 
   .card-price {
     font-size: 1rem;
+    padding-top: .75rem;
   }
 
   .card-action {
-    right: 0.9rem;
-    bottom: 0.9rem;
-    padding: 0.4rem 0.65rem;
+    right: .8rem;
+    bottom: .8rem;
+    min-height: 32px;
+    padding: .4rem .65rem;
+    font-size: .65rem;
+  }
+}
+
+/* =========================================================
+   ACCESIBILIDAD — FOCUS
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, .28);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   REDUCCIÓN DE MOVIMIENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }
